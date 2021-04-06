@@ -1,31 +1,36 @@
-import nltk
-import os
+from __future__ import division
 from pprint import pprint
-nltk.download('punkt')
+import tokenizer
+import splitter
+import decisiontree
+
 
 def prettyprint(count):
     print("====== Token Counts =======")
     for key in count:
         print(f"{count[key]}\t{key.rjust(3)}")
 
-def tokenize(data, count):
-    tokens = nltk.word_tokenize(data)
 
-    for token in tokens:
-        if token in count.keys():
-            count[token] = count[token] + 1
-        else:
-            count[token] = 1
+#count = {}
+#tokenizer.read_data(count)
+#pprint(list(sorted(count.items(), key=lambda x:x[1], reverse=True))[:300])
 
-def read_data(count):
-    for filename in os.listdir('data/enron1/spam'):
-        with open(os.path.join('data/enron1/spam', filename), errors='ignore') as file:
-            data = file.read()
-            tokenize(data, count)
- 
+spam_items = {}
+ham_items = {}
+splitter.read_items(spam_items, ham_items)
 
-count = {}
-read_data(count)
+train = {}
+test = {}
+splitter.split_data(train, test, spam_items, ham_items)
 
-pprint(list(sorted(count.items(), key=lambda x:x[1], reverse=True))[:300])
+classifier = decisiontree.build_tree(train)
+
+count = 0
+for key, value in test.items():
+    result = classifier.classify(decisiontree.extract_features(key))
+    if result == value:
+        count = count + 1
+
+accuracy = count / len(test)
+print('Accuracy: %f' % accuracy)
 
