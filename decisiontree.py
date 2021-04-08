@@ -2,7 +2,7 @@ import nltk
 import tokenizer
 
 #placeholders for now
-spam_tokens = ['!', '$', "%", 'price', 'pills', 'stock', 'money', 'investment', 'security', 'click', 'product', 'product', 'offer', 'free', 'service', 'dollars']
+spam_tokens = ['!', '$', "%", 'pills', 'stock', 'money', 'investment', 'security', 'click', 'product', 'product', 'offer', 'free', 'service', 'dollars']
 
 def extract_features(data):
     features = {}
