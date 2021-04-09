@@ -1,5 +1,6 @@
 import os
 
+#Read data into respective group
 def read_items(spam_items, ham_items):
     for filename in os.listdir('data'):
         with open(os.path.join('data', filename), errors='ignore') as file:
@@ -8,6 +9,7 @@ def read_items(spam_items, ham_items):
             else:
                 ham_items[file.read()] = 'ham'
 
+#Split data into training and test sets
 def split_data(train, test, spam, ham):
     spam_size = len(spam)
     ham_size = len(ham)
