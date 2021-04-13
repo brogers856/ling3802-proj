@@ -13,9 +13,9 @@ def extract_features(data, spam_tokens):
         features[key] = key in count
     #Add feature for typo proportion
     typos = spellcheck.typo_proportion(data)
-    features['typos(low)'] = typos < 0.05)
-    features['typos(med)'] = 0.05 <= typos < 0.1)
-    features['typos(high)'] = typos >= 0.1)
+    features['typos(low)'] = (typos < 0.05)
+    features['typos(med)'] = (0.05 <= typos < 0.1)
+    features['typos(high)'] = (typos >= 0.1)
     return features
 
 #Build decision tree
