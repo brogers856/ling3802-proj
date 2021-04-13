@@ -67,6 +67,8 @@ print('False positives: %d' % fp)
 print('True negatives: %d' % tn)
 print('False negatives: %d' % fn)
 
+print(classifier.pseudocode(depth=4))
+
 #Save the model
 f = open('decision_tree_classifier', 'wb')
 pickle.dump(classifier, f)
